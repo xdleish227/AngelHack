@@ -7,17 +7,8 @@ from pprint import pprint
 import dateutil.parser
 
 # Create airport name -> codeSEQ mapping
-reader = csv.DictReader(open("airportcode.csv", 'r'))
-dict_list = []
-for line in reader:
-    dict_list.append(line)
-
-name_to_code = {}
-for i in dict_list:
-    short_name= i['Description'].split(":")[-1].strip()
-    code = i['Code']
-    name_to_code[short_name] = code
-
+name_to_code = csv.DictReader(open("id_code.csv", 'r')
+                            
 # Take arguments
 parser = argparse.ArgumentParser()
 parser.add_argument('--departurreAirportFS')
@@ -34,7 +25,6 @@ model = pickle.load(model_pkl)
 # Data preparation
 depart = name_to_code[args.departurreAirportFS]
 arrive = name_to_code[args.arrivalAirportFS]
-### Change to airport id code
 
 tmp = date.date()
 tmp = str(tmp).split('-')
@@ -47,10 +37,10 @@ m = 0
 m = m + time.hour*60
 m = m + time.minute
 
-d = {'ORIGIN_AIRPORT_SEQ_ID':depart, 'DEST_AIRPORT_SEQ_ID':arrive, 'MONTH':month, 'DAY_OF_MONTH':day, 'CRS_DEP_TIME':m}
+d = {'ORIGIN_AIRPORT_ID':depart, 'DEST_AIRPORT_ID':arrive, 'MONTH':month, 'DAY_OF_MONTH':day, 'CRS_DEP_TIME':m}
 
-x = pd.DataFrame([d], columns=['ORIGIN_AIRPORT_SEQ_ID', 'DEST_AIRPORT_SEQ_ID', 'MONTH', 'DAY_OF_MONTH', 'CRS_DEP_TIME'])
+x = pd.DataFrame([d], columns=['ORIGIN_AIRPORT_ID', 'DEST_AIRPORT_ID', 'MONTH', 'DAY_OF_MONTH', 'CRS_DEP_TIME'])
 
 # Prediction
 y_pred = model.predict_proba(x)
-print(y_pred)
+print(type(y_pred))

@@ -32,8 +32,9 @@ model_pkl = open("LogRegression_Model.pkl", "rb")
 model = pickle.load(model_pkl)
 
 # Data preparation
-depart = args.departurreAirportFS
-arrive = args.arrivalAirportFS
+depart = name_to_code[args.departurreAirportFS]
+arrive = name_to_code[args.arrivalAirportFS]
+### Change to airport id code
 
 tmp = date.date()
 tmp = str(tmp).split('-')

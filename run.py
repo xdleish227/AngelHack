@@ -7,7 +7,7 @@ from pprint import pprint
 import dateutil.parser
 
 # Create airport name -> codeSEQ mapping
-name_to_code = csv.DictReader(open("id_code.csv", 'r')
+name_to_code = csv.DictReader(open("id_code.csv", 'r'))
                             
 # Take arguments
 parser = argparse.ArgumentParser()
